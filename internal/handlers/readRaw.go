@@ -21,9 +21,5 @@ func readRaw(url string) (io.ReadCloser, error) {
 	req.Header.Set("Cookie", "sessionid=abcd1234; other=xyz")
 
 	resp, err := client.Do(req)
-	// bodyBytes, err := io.ReadAll(resp.Body)
-	// if err != nil {
-	// 	return nil, err
-	// }
 	return resp.Body, nil
 }
