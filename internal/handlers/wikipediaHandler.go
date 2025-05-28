@@ -32,7 +32,7 @@ func (h *wikipediaHandler) GetArticles() (entity.Article, error) {
 		paragraph := strings.TrimSpace(s.Text())
 		if paragraph != "" {
 			sb.WriteString(paragraph)
-			sb.WriteString("\n\n") // отступ между абзацами
+			sb.WriteString("\n\n")
 		}
 	})
 	resArticle.Data = strings.TrimSpace(sb.String())

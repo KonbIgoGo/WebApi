@@ -27,8 +27,12 @@ func (h *bigencHandler) GetArticles() (entity.Article, error) {
 		resArticle.Title = text
 	})
 
-	doc.Find("div.bre-article-body").Each(func(i int, s *goquery.Selection) {
-		text := strings.TrimSpace(s.Text())
+	doc.Find("div.bre-article-body").Not("span.bre-media-image _note-exclude").Each(func(i int, s *goquery.Selection) {
+		cloned := s.Clone()
+		cloned.Find("span._note-exclude").Each(func(_ int, ex *goquery.Selection) {
+			ex.Remove()
+		})
+		text := strings.TrimSpace(cloned.Text())
 		resArticle.Data = text
 	})
 

@@ -12,7 +12,6 @@ type WebHandler interface {
 }
 
 func New(url string) (WebHandler, error) {
-	println("T")
 	if strings.Contains(url, "bigenc.ru") {
 		return &bigencHandler{
 			url: url,
