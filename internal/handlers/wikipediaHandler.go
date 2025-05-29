@@ -1,7 +1,6 @@
 package handlers
 
 import (
-	"log"
 	"strings"
 
 	"github.com/PuerkitoBio/goquery"
@@ -13,11 +12,15 @@ type wikipediaHandler struct {
 }
 
 func (h *wikipediaHandler) GetArticles() (entity.Article, error) {
-	data, _ := readRaw(h.url)
+	data, err := readRaw(h.url)
+
+	if err != nil {
+		return entity.Article{}, err
+	}
 
 	doc, err := goquery.NewDocumentFromReader(data)
 	if err != nil {
-		log.Fatal(err)
+		return entity.Article{}, err
 	}
 
 	resArticle := entity.Article{}
